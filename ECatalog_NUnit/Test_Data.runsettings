@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+
+  <TestRunParameters>
+    
+    <Parameter name="input_file_name1" value="C:\Users\OChernovolyk\source\repos\E_Catalog\E_Catalog\bin\Debug\MustBe.txt"/>
+    
+  </TestRunParameters>
+
+</RunSettings>
