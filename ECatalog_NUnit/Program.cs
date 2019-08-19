@@ -25,7 +25,7 @@ namespace E_Catalog
             string currentCategoryName;
 
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 20; i++)
             {
                 try
                 {
@@ -33,7 +33,7 @@ namespace E_Catalog
                     IWebElement category = driver.FindElement(By.XPath(part1 + "/a"));
                     currentCategoryName = category.Text;
 
-                    for (int j = 1; j < 100; j++)
+                    for (int j = 1; j < 20; j++)
                     {
                         string final = $"{part1}/div/div/a[{j}]";
                         IWebElement sub_category = driver.FindElement(By.XPath(final));
@@ -88,13 +88,13 @@ namespace E_Catalog
         [Test]
         public void ActualCategoryEqualExpected()
         {
-            List<string> search = File.ReadAllLines("C:/Users/OChernovolyk/source/repos/ECatalog_NUnit/ECatalog_NUnit/bin/Debug/Test.txt").ToList();
+            List<string> search = File.ReadAllLines("C:/Users/OChernovolyk/source/repos/ECatalog_NUnit/ECatalog_NUnit/bin/Debug/Test1.txt").ToList();
 
             for (int i = 0; i<search.Count; i++)
             {
-                string actualName = ReadActualCategories(search[i]);
+                string actualName = ReadActualCategories(search[12]);
 
-                string expName = ReadExpectedCategories(search[i]);
+                string expName = ReadExpectedCategories(search[12]);
 
 
                 Assert.AreEqual(expName, actualName);
