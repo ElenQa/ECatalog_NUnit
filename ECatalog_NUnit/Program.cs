@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace E_Catalog
 {
@@ -25,7 +26,7 @@ namespace E_Catalog
             string currentCategoryName;
 
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 100; i++)
             {
                 try
                 {
@@ -33,7 +34,7 @@ namespace E_Catalog
                     IWebElement category = driver.FindElement(By.XPath(part1 + "/a"));
                     currentCategoryName = category.Text;
 
-                    for (int j = 1; j < 20; j++)
+                    for (int j = 1; j < 100; j++)
                     {
                         string final = $"{part1}/div/div/a[{j}]";
                         IWebElement sub_category = driver.FindElement(By.XPath(final));
@@ -88,18 +89,37 @@ namespace E_Catalog
         [Test]
         public void ActualCategoryEqualExpected()
         {
-            List<string> search = File.ReadAllLines("C:/Users/OChernovolyk/source/repos/ECatalog_NUnit/ECatalog_NUnit/bin/Debug/Test1.txt").ToList();
+            string temp;
+            List<string> search = File.ReadAllLines("C:/Users/OChernovolyk/source/repos/ECatalog_NUnit/ECatalog_NUnit/bin/Debug/Test.txt").ToList();
+            try {
+                for (int i = 0; i < search.Count; i++)
+                {
+                    temp = search[i];
+                    string actualName = ReadActualCategories(search[i]);
 
-            for (int i = 0; i<search.Count; i++)
-            {
-                string actualName = ReadActualCategories(search[12]);
-
-                string expName = ReadExpectedCategories(search[12]);
+                    string expName = ReadExpectedCategories(search[i]);
 
 
-                Assert.AreEqual(expName, actualName);
+                    Assert.AreEqual(expName, actualName);
+
+                    if (expName != actualName)
+                    {
+                        Assert.Fail($"Категория {search[i]} была в {expName} , а сейчас в {actualName}");
+                    }
+
+                    else
+                    {
+                        continue;
+                    }
+                }
             }
-        }
+            catch(AssertionException)
+            {
+
+                Assert.Fail();
+            }
+            
+            }
 
         static void Main(string []args)
         {
