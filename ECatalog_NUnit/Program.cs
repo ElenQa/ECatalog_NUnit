@@ -8,7 +8,6 @@ using System;
 
 namespace E_Catalog
 {
-   
 
     [TestFixture]
     public class Program
@@ -26,25 +25,44 @@ namespace E_Catalog
             string currentCategoryName;
 
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 100; i++)
             {
                 try
                 {
-                    string part1 = $"/html/body/div[3]/div/ul/li[{i}]";
-                    IWebElement category = driver.FindElement(By.XPath(part1 + "/a"));
-                    currentCategoryName = category.Text;
+                    //string part1 = $"/html/body/div[3]/div/ul/li[{i}]";
+                    //IWebElement category = driver.FindElement(By.XPath(part1 + "/a"));
 
-                    for (int j = 1; j < 100; j++)
+                    //currentCategoryName = categories.Text;
+
+                    //for (int j = 1; j < 100; j++)
+                    //{
+                    //    string final = $"{part1}/div/div/a[{j}]";
+                    //    IWebElement sub_category = driver.FindElement(By.XPath(final));
+                    //    string sub_cat = sub_category.GetAttribute("textContent");
+
+                    //    if (sub_cat.Contains(search1))
+
+                    IWebElement categories_list = driver.FindElement(By.ClassName("mainmenu-list"));
+                    IReadOnlyCollection<IWebElement> categories = categories_list.FindElements(By.TagName("li"));
+
+                    foreach (IWebElement category in categories)
                     {
-                        string final = $"{part1}/div/div/a[{j}]";
-                        IWebElement sub_category = driver.FindElement(By.XPath(final));
-                        string sub_cat = sub_category.GetAttribute("textContent");
-                        
-                        if (sub_cat.Contains(search1))
+                        currentCategoryName = category.Text;
+                        //TestContext.WriteLine($"Processing categoty {currentCategoryName}");
+
+                        IWebElement items_list = category.FindElement(By.ClassName("mainmenu-subwrap"));
+                        IReadOnlyCollection<IWebElement> items = items_list.FindElements(By.TagName("a"));
+                        foreach (IWebElement item in items)
                         {
-                            driver.Close();
-                            return currentCategoryName;
-                          
+                            string actualItem = item.GetAttribute("textContent");
+                            //TestContext.WriteLine($"Processing item {actualItem}");
+                            if (actualItem.Contains(search1))
+
+                            {
+                                driver.Close();
+                                return currentCategoryName;
+
+                            }
                         }
                     }
                 }
@@ -59,8 +77,9 @@ namespace E_Catalog
 
                     break;
                 }
+                                
             }
-
+            driver.Close();
             return null;
         }
         public string ReadExpectedCategories(string subcategory)
@@ -70,16 +89,16 @@ namespace E_Catalog
             {
                 string exp_category;
                 string exp_subcategory;
-                
+
                 int delim_pos = lines[i].IndexOf('-');
                 exp_category = lines[i].Substring(0, delim_pos);
                 exp_subcategory = (lines[i].Substring(delim_pos + 1));
 
-                if(subcategory == exp_subcategory)
+                if (subcategory == exp_subcategory)
                 {
                     return exp_category;
                 }
-               
+
 
             }
             return null;
@@ -92,6 +111,7 @@ namespace E_Catalog
             string temp;
             List<string> search = File.ReadAllLines("C:/Users/OChernovolyk/source/repos/ECatalog_NUnit/ECatalog_NUnit/bin/Debug/Test.txt").ToList();
             try {
+
                 for (int i = 0; i < search.Count; i++)
                 {
                     temp = search[i];
@@ -100,32 +120,31 @@ namespace E_Catalog
                     string expName = ReadExpectedCategories(search[i]);
 
 
-                    Assert.AreEqual(expName, actualName);
-
-                    if (expName != actualName)
+                    //Assert.AreEqual(expName, actualName);
+                    if (expName == actualName)
                     {
-                        Assert.Fail($"Категория {search[i]} была в {expName} , а сейчас в {actualName}");
+                        TestContext.WriteLine($"Категория {search[i]} находится в {actualName}");
                     }
-
                     else
                     {
+                        TestContext.WriteLine($"Категория {search[i]} была в {expName} , а сейчас в {actualName}");
                         continue;
                     }
-                }
-            }
-            catch(AssertionException)
-            {
 
-                Assert.Fail();
+                }
+                
+                }
+            catch (Exception e)
+            {
+                TestContext.WriteLine(e.Message);
             }
             
-            }
-
-        static void Main(string []args)
-        {
 
 
         }
+
+        
     }
 
+   
 }
