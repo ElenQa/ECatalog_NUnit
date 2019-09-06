@@ -12,6 +12,8 @@ namespace Test
     class Program
     {
         [TestCase("Фото", "Студийный свет")]
+        [TestCase("Фото", "gsgasg")]
+        [TestCase("Фото", "agfahsrjk")]
         public void CheckItemCategory(string categoryName, string ItemName)
         {
             IWebDriver driver;
