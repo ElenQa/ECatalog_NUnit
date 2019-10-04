@@ -11,11 +11,16 @@ namespace Test
 {
     class Program
     {
-        [TestCase("Фото", "Студийный свет")]
-        [TestCase("Фото", "gsgasg")]
-        [TestCase("Фото", "agfahsrjk")]
-        public void CheckItemCategory(string categoryName, string ItemName)
+        //[TestCase("Фото", "Студийный свет")]
+        [Test]
+        public void CheckItemCategory( )
         {
+            string categoryName = TestContext.Parameters["categoryName"];
+            string ItemName = TestContext.Parameters["ItemName"];
+            TestContext.WriteLine(categoryName);
+            TestContext.WriteLine(ItemName);
+
+
             IWebDriver driver;
 
             driver = new ChromeDriver();

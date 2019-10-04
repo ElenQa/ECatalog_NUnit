@@ -106,7 +106,7 @@ namespace E_Catalog
         }
 
 
-        [Test]
+        
         public void ActualCategoryEqualExpected()
         {
             string temp;
