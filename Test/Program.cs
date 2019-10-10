@@ -12,13 +12,13 @@ namespace Test
     class Program
     {
         [Test]
-        [TestCase("Компьютеры", "ПК")]
+        //[TestCase("Компьютеры", "ПК")]
         public void CheckItemCategory(string categoryName, string ItemName)
         {
-            //categoryName = TestContext.Parameters["categoryName"];
-            //ItemName = TestContext.Parameters["ItemName"];
-            //TestContext.WriteLine(categoryName);
-            //TestContext.WriteLine(ItemName);
+            categoryName = TestContext.Parameters["categoryName"];
+            ItemName = TestContext.Parameters["ItemName"];
+            TestContext.WriteLine(categoryName);
+            TestContext.WriteLine(ItemName);
 
  
             IWebDriver driver;
