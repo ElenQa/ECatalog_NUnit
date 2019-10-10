@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace Test
 {
+    [TestFixture]
     class Program
     {
-        [Test]
+        [TestCase("jkygkjg uy ")]
         //[TestCase("Компьютеры", "ПК")]
-        public void CheckItemCategory( )
+        public void CheckItemCategory(string tmp)
         {
             string categoryName = TestContext.Parameters.Get("categoryName");
             string ItemName = TestContext.Parameters.Get("ItemName");
