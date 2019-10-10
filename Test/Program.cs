@@ -13,10 +13,10 @@ namespace Test
     {
         [Test]
         //[TestCase("Компьютеры", "ПК")]
-        public void CheckItemCategory(string categoryName, string ItemName)
+        public void CheckItemCategory( )
         {
-            categoryName = TestContext.Parameters.Get("categoryName");
-            ItemName = TestContext.Parameters.Get("ItemName");
+            string categoryName = TestContext.Parameters.Get("categoryName");
+            string ItemName = TestContext.Parameters.Get("ItemName");
             TestContext.WriteLine(categoryName);
             TestContext.WriteLine(ItemName);
 
