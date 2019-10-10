@@ -12,14 +12,15 @@ namespace Test
     class Program
     {
         [Test]
-
-        public void CheckItemCategory( )
+        [TestCase("Компьютеры", "ПК")]
+        public void CheckItemCategory(string categoryName, string ItemName)
         {
-            string categoryName = TestContext.Parameters["categoryName"];
-            string ItemName = TestContext.Parameters["ItemName"];
-            TestContext.WriteLine(categoryName);
-            TestContext.WriteLine(ItemName);
+            //categoryName = TestContext.Parameters["categoryName"];
+            //ItemName = TestContext.Parameters["ItemName"];
+            //TestContext.WriteLine(categoryName);
+            //TestContext.WriteLine(ItemName);
 
+ 
             IWebDriver driver;
 
             driver = new ChromeDriver();
@@ -48,6 +49,11 @@ namespace Test
             }
 
             driver.Close();
+        }
+
+        public static void Main ()
+        {
+
         }
     }
 }
