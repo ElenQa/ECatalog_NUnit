@@ -15,8 +15,8 @@ namespace Test
         //[TestCase("Компьютеры", "ПК")]
         public void CheckItemCategory(string categoryName, string ItemName)
         {
-            categoryName = TestContext.Parameters["categoryName"];
-            ItemName = TestContext.Parameters["ItemName"];
+            categoryName = TestContext.Parameters.Get("categoryName");
+            ItemName = TestContext.Parameters.Get("ItemName");
             TestContext.WriteLine(categoryName);
             TestContext.WriteLine(ItemName);
 
