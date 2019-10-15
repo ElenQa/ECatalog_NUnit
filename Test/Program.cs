@@ -12,12 +12,12 @@ namespace Test
     [TestFixture]
     class Program
     {
-        [TestCase("jkygkjg uy ")]
-        //[TestCase("Компьютеры", "ПК")]
-        public void CheckItemCategory(string tmp)
+        [TestCase("jkygkjg uy ", "nkvbkl")]
+        [TestCase("Компьютеры", "ПК")]
+        public void CheckItemCategory(string categoryName, string ItemName)
         {
-            string categoryName = TestContext.Parameters.Get("categoryName");
-            string ItemName = TestContext.Parameters.Get("ItemName");
+            categoryName = TestContext.Parameters.Get("categoryName");
+            ItemName = TestContext.Parameters.Get("ItemName");
             TestContext.WriteLine(categoryName);
             TestContext.WriteLine(ItemName);
 
