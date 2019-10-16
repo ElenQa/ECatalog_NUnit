@@ -16,16 +16,17 @@ namespace Test
         [TestCase("Компьютеры", "ПК")]
         public void CheckItemCategory(string categoryName, string ItemName)
         {
-            categoryName = TestContext.Parameters.Get("categoryName");
-            ItemName = TestContext.Parameters.Get("ItemName");
-            TestContext.WriteLine(categoryName);
-            TestContext.WriteLine(ItemName);
+            //categoryName = TestContext.Parameters.Get("categoryName");
+            //ItemName = TestContext.Parameters.Get("ItemName");
+            //TestContext.WriteLine(categoryName);
+            //TestContext.WriteLine(ItemName);
 
  
             IWebDriver driver;
 
             driver = new ChromeDriver();
             driver.Url = "https://ek.ua/";
+
 
             IWebElement categories_list = driver.FindElement(By.ClassName("mainmenu-list"));
             IReadOnlyCollection<IWebElement> categories = categories_list.FindElements(By.TagName("li"));
